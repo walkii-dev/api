@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ValidadorLimiteDiarioConsultaPaciente implements InterfaceValidadorRegraDeNegocio{
+
     @Autowired
     private ConsultaRepository consultaRepository;
 
@@ -17,7 +18,7 @@ public class ValidadorLimiteDiarioConsultaPaciente implements InterfaceValidador
         var ultimoHorario = dados.data().withHour(18);
         var pacienteAtingiuLimiteDiarioConsulta = consultaRepository.existsByPacienteIdAndDataBetween(dados.idPaciente(),primeiroHorario,ultimoHorario);
 
-        if(!pacienteAtingiuLimiteDiarioConsulta){
+        if(pacienteAtingiuLimiteDiarioConsulta){
             throw new ValidacaoException("Paciente não pode mais marcar consultas na data informada.");
         }
 

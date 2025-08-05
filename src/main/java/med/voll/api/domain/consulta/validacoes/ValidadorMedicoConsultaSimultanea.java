@@ -15,7 +15,7 @@ public class ValidadorMedicoConsultaSimultanea implements InterfaceValidadorRegr
 
         var medicoTemConsultaSimultanea = consultaRepository.existsByMedicoIdAndData(dados.idMedico(),dados.data());
 
-        if (!medicoTemConsultaSimultanea){
+        if (medicoTemConsultaSimultanea){
             throw new ValidacaoException("Médico já possui uma consulta agendada neste horário.");
         }
 
